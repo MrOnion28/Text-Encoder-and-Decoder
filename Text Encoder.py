@@ -225,10 +225,17 @@ def decrypt_affine(a,b):
     
 def decrypt_vigenere(keyword):
     d = deque(plaintext)
-    for x, letter in zip(range(len(decodetext)), decodetext):
-        index = x%len(keyword)
-        d.rotate(index)
-        ciphindex = d.index()
+    keyword = keyword.lower()
+    keyletter = 0
+    for letter in decodetext:
+        if letter in plaintext:
+            shift = plaintext.index(keyword[keyletter % len(keyword)])
+            d.rotate(-shift)
+            index = d.index(letter)
+            newletter = plaintext[index]
+            newtext.append(newletter)
+            d.rotate(shift)
+            keyletter += 1
 
 
 #-------------------------------------------------------------
@@ -263,6 +270,12 @@ if eod.upper() == "D":
         b = int(input("Please enter the value for b"))
         newtext = []
         decrypt_affine(a,b)
+        print(newtext)
+
+    elif decryption_type == "5":
+        keyword = input("Please enter the keyword bro")
+        newtext =[]
+        decrypt_vigenere(keyword)
         print(newtext)
 #---------------------------------------------------------
 
@@ -311,5 +324,3 @@ elif eod == "D":
 else:
     print("try again(restart the code)")         
         
-
-
