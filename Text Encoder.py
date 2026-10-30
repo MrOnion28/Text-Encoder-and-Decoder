@@ -1,5 +1,7 @@
 import math
+from collections import deque
 text = input("Please enter text to encode(numbers, case and foreign characters will be ignored): ")
+decodetext = input("Please enter text to decode(numbers, case and foreign characters will be ignored): ")
 plaintext = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 ciphertext = []
 morse_cipher = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
@@ -85,16 +87,6 @@ def encrypt_vigenere(keyword):
                 if keyletter >= len(keyword):
                     keyletter = 0   
             text[x]=coded_word
-
-def encrypt_playfair(key):
-    key_mod = ""
-    for letter in key:
-        if letter not in key_mod:
-            key_mod+=letter
-    key = key_mod
-    for letter in plaintext:
-        if letter not in key:
-            key+=letter
 
 def encrypt_cl_row_transposition(key):
     col = len(str(key))
@@ -188,6 +180,8 @@ def encrypt_hill(keyword):
         new_text = el
     print(new_text)
 
+  #------------------------------------------------------------  
+
 def decrypt_caesar(offset):
     offset = 26 - offset
     for x in range(offset,26):
@@ -204,6 +198,73 @@ def decrypt_caesar(offset):
         text[x]=coded_word
 
 def decrypt_substitution(key):
+    key = key.lower()
+    for letter in decodetext:
+        if letter in key:
+            x = key.index(letter)
+            newtext.append(plaintext[x])
+
+def decrypt_morse():
+    global decodetext
+    decodetext = decodetext.split(" ")
+    for part in decodetext:
+        y = morse_cipher.index(part)
+        newtext.append(plaintext[y])
+
+def decrypt_affine(a,b):
+    global decodetext
+    decodetext = decodetext.lower()
+    for letter in decodetext:
+        if letter in plaintext:
+            lnumber = plaintext.index(letter)
+            toneg1 = 27/a
+            newnumber = (toneg1*(lnumber-b))%26
+            newnumber = int(newnumber)
+            z = plaintext[newnumber]
+            newtext.append(z)
+    
+def decrypt_vigenere(keyword):
+    d = deque(plaintext)
+    for x, letter in zip(range(len(decodetext)), decodetext):
+        index = x%len(keyword)
+        d.rotate(index)
+        ciphindex = d.index()
+
+
+#-------------------------------------------------------------
+if eod.upper() == "D":
+    print("1: Caesar Cipher")
+    print("2: Substitution Cipher")
+    print("3: Morse Code")
+    print("4: Affine Cipher")
+    print("5: Vigenere Cipher")
+    print("6: Hill Cipher")
+    print("7: Columnar Transposition")
+    decryption_type = input("Enter the decryption type(1,2,3,4,5 or 6):")
+
+    if decryption_type == "1":
+        offset = int(input("Type the offset value"))
+        decrypt_caesar(offset)
+        print(text)
+
+    elif decryption_type == "2":
+        key = input("Enter the key for the cipher")
+        newtext =[]
+        decrypt_substitution(key)
+        print(newtext)
+
+    elif decryption_type == "3":
+        newtext = []
+        decrypt_morse()
+        print(newtext)
+
+    elif decryption_type == "4":
+        a = int(input("Please enter the value for a"))
+        b = int(input("Please enter the value for b"))
+        newtext = []
+        decrypt_affine(a,b)
+        print(newtext)
+#---------------------------------------------------------
 
 if eod.upper() == "E":
     print("1:Caeser Cipher")
@@ -213,7 +274,7 @@ if eod.upper() == "E":
     print("5: Vigenere Cipher")
     print("6: Hill Cipher")
     print("7: Columnar transposition")
-    encryption_type = input("Enter the encyption_type(A,B,C,D,E or F): ")
+    encryption_type = input("Enter the encyption type(1,2,3,4,5 or 6): ")
         
 
 
