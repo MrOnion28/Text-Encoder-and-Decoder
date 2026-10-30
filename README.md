@@ -1,0 +1,1 @@
+We created a text encoder and decoder that converts text into ciphertext based on various different cipher types, and also decrypts ciphertext for these cipher types. Our code encrypts plaintext through a caesar cipher, substitution cipher, morse code, vigenere cipher, affine cipher, hill cipher and columnar transposition cipher. It decyrpts the first 5.   
