@@ -10,7 +10,7 @@ We created a text encoder and decoder that converts text into ciphertext based o
 We separated the code into functions for encryption, functions for decryption, encryption inputs, and the decryption inputs. 
 
 # Usage
-
+First, a line will pop up asking what text you want to encode. If you want to encode, then type the plaintext. Otherwise, just click enter. Then, in the next input, type your text to decode. Then, just type E or D, based on what you want to do. Then, select the type of cipher by typing in its relative number. Inputs will then follow for the information required to encode or decode with that type of cipher. Keep clicking enter after each stage and then, you will have your answer!
 
 # AI Usage
 I used minimal AI just to fix my Vigenere cipher decryption which I was a bit confused about. I used the AI to explain my mistakes and tell me what could be done to change it. I then asked it to make the correct changes and I saw what I was doing wrong.
