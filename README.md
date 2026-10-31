@@ -9,6 +9,9 @@ We created a text encoder and decoder that converts text into ciphertext based o
 
 We separated the code into functions for encryption, functions for decryption, encryption inputs, and the decryption inputs. 
 
+# Usage
+
+
 # AI Usage
 I used minimal AI just to fix my Vigenere cipher decryption which I was a bit confused about. I used the AI to explain my mistakes and tell me what could be done to change it. I then asked it to make the correct changes and I saw what I was doing wrong.
 
